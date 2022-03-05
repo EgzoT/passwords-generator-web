@@ -1,6 +1,7 @@
 import React from 'react';
 
 import GlowingCheckBox from '../components/GlowingCheckBox';
+import NumberInput from '../components/NumberInput';
 
 import { faSortNumericDown, faSubscript, faFont, faHashtag } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,6 +9,7 @@ interface IMainProps {}
 
 interface IMainState {
     password: string;
+    length: number;
 
     digits: boolean;
     lowercase: boolean;
@@ -26,6 +28,7 @@ class Main extends React.Component<IMainProps, IMainState> {
 
         this.state = {
             password: "",
+            length: 20,
 
             digits: true,
             lowercase: true,
@@ -58,10 +61,9 @@ class Main extends React.Component<IMainProps, IMainState> {
 
     // https://stackoverflow.com/a/51540480/18094846
     generatePassword = (): void => {
-        const length: number = 20;
         const wishlist: string = this.getCharacters();
 
-        const password: string = Array.from(crypto.getRandomValues(new Uint32Array(length)))
+        const password: string = Array.from(crypto.getRandomValues(new Uint32Array(this.state.length)))
             .map((x) => wishlist[x % wishlist.length])
             .join('');
 
@@ -81,6 +83,13 @@ class Main extends React.Component<IMainProps, IMainState> {
                 <button onClick={ this.generatePassword }>
                     Generate password
                 </button>
+
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 10, marginBottom: 5 }}>
+                    <NumberInput
+                        value={ this.state.length }
+                        onChange={ (v) => { this.setState({ length: v }) } }
+                    />
+                </div>
 
                 <div style={{ width: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ width: 'fit-content', padding: 10, height: 'auto', backgroundColor: "#00000070", marginTop: 10, display: 'flex', gap: 10, alignItems: 'auto', justifyContent: 'auto', borderRadius: 15 }}>
