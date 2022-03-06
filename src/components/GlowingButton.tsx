@@ -5,21 +5,20 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 
-// https://www.youtube.com/watch?v=zcELGwSZwx4
-
 interface IMainProps {
     icon?: IconDefinition;
-    checked?: boolean;
-    onClick?: (value: boolean) => void;
+    onClick?: () => void;
     style?: React.CSSProperties;
 }
 
-function GlowingCheckBox(props: IMainProps) {
-    const [checked, setChecked] = useState(props.checked);
+function GlowingButton(props: IMainProps) {
+    const [hover, setHover] = useState(false);
 
     return (
         <div
-            onClick={() => { setChecked(!checked); if (props.onClick) { props.onClick(!checked) } }}
+            onClick={() => { if (props.onClick) { props.onClick() } }}
+            onMouseEnter={ () => setHover(true) }
+            onMouseLeave={ () => setHover(false) }
             style={{ ...{
                 width: 60,
                 height: 60,
@@ -35,7 +34,7 @@ function GlowingCheckBox(props: IMainProps) {
                 <FontAwesomeIcon
                     icon={ props.icon ? props.icon : faBan }
                     style={{
-                        color: !checked ? "#222" : "#FFF",
+                        color: !hover ? "#222" : "#FFF",
                         margin: "auto"
                     }}
                 />
@@ -43,5 +42,5 @@ function GlowingCheckBox(props: IMainProps) {
         </div>
     );
 }
-  
-export default GlowingCheckBox;
+
+export default GlowingButton;
