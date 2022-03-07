@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-
-import { faBan } from "@fortawesome/free-solid-svg-icons";
-
 interface IMainProps {
-    icon?: IconDefinition;
+    text?: string;
     onClick?: () => void;
     style?: React.CSSProperties;
+    styleHover?: React.CSSProperties;
 }
 
 function GlowingButton(props: IMainProps) {
@@ -20,9 +16,11 @@ function GlowingButton(props: IMainProps) {
             onMouseEnter={ () => setHover(true) }
             onMouseLeave={ () => setHover(false) }
             style={{ ...{
-                width: 60,
-                height: 60,
+                width: 90,
+                height: 45,
+                fontSize: 16,
                 backgroundColor: "#101010",
+                color: !hover ? "#FFF" : "#818181",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -31,16 +29,10 @@ function GlowingButton(props: IMainProps) {
                 cursor: 'pointer',
                 webkitTapHighlightColor: 'transparent',
                 userSelect: 'none'
-            }, ...props.style }}
+            }, ...props.style, ... props.styleHover ? props.styleHover : {} }}
         >
             <div style={{ margin: "auto" }}>
-                <FontAwesomeIcon
-                    icon={ props.icon ? props.icon : faBan }
-                    style={{
-                        color: !hover ? "#222" : "#FFF",
-                        margin: "auto"
-                    }}
-                />
+                { props.text }
             </div>
         </div>
     );

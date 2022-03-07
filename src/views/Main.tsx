@@ -2,6 +2,8 @@ import React from 'react';
 
 import GlowingCheckBox from '../components/GlowingCheckBox';
 import NumberInput from '../components/NumberInput';
+import GlowingInputText from '../components/GlowingInputText';
+import GlowingTextButton from '../components/GlowingTextButton';
 
 import { faSortNumericDown, faSubscript, faFont, faHashtag } from "@fortawesome/free-solid-svg-icons";
 
@@ -73,16 +75,13 @@ class Main extends React.Component<IMainProps, IMainState> {
     render() {
         return (
             <div>
-                <input
-                    type="text"
-                    style={{ width: 300 }}
-                    defaultValue={ this.state.password }
-                    min={ 1 }
-                />
+                <GlowingInputText value={ this.state.password } style={{ width: 400, fontSize: 16 }} />
 
-                <button onClick={ this.generatePassword }>
-                    Generate password
-                </button>
+                <GlowingTextButton
+                    text="Generate password"
+                    onClick={ this.generatePassword }
+                    style={{ width: 160, marginLeft: "auto", marginRight: "auto", marginTop: 10, marginBottom: 10 }}
+                />
 
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 10, marginBottom: 5 }}>
                     <NumberInput

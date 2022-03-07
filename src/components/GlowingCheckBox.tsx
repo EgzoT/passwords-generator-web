@@ -28,7 +28,10 @@ function GlowingCheckBox(props: IMainProps) {
                 justifyContent: "center",
                 alignItems: "center",
                 border: "3px solid #000",
-                borderRadius: 15
+                borderRadius: 15,
+                cursor: 'pointer',
+                webkitTapHighlightColor: 'transparent',
+                userSelect: 'none'
             }, ...props.style }}
         >
             <div style={{ margin: "auto" }}>
