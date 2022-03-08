@@ -45,7 +45,8 @@ function NumberInput(props: IMainProps) {
                     borderBottom: "3px solid #000",
                     borderRight: "0px solid #000",
                     borderLeft: "0px solid #000",
-                    outline: "black solid 0px"
+                    outline: "black solid 0px",
+                    transition: "all 0.5s ease-out"
                 }, ...props.style }}
                 value={ props.value ? props.value : 20 }
                 min={ props.min ? props.min : 1 }

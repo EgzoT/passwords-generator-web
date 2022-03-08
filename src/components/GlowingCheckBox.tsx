@@ -39,7 +39,8 @@ function GlowingCheckBox(props: IMainProps) {
                     icon={ props.icon ? props.icon : faBan }
                     style={{
                         color: !checked ? "#222" : "#FFF",
-                        margin: "auto"
+                        margin: "auto",
+                        transition: "all 0.5s ease-out"
                     }}
                 />
             </div>

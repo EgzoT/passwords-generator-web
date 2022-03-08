@@ -28,8 +28,9 @@ function GlowingButton(props: IMainProps) {
                 borderRadius: 15,
                 cursor: 'pointer',
                 webkitTapHighlightColor: 'transparent',
-                userSelect: 'none'
-            }, ...props.style, ... props.styleHover ? props.styleHover : {} }}
+                userSelect: 'none',
+                transition: "all 0.5s ease-out"
+            }, ...props.style, ... hover && props.styleHover ? props.styleHover : {} }}
         >
             <div style={{ margin: "auto" }}>
                 { props.text }

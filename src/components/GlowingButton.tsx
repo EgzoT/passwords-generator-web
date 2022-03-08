@@ -9,6 +9,9 @@ interface IMainProps {
     icon?: IconDefinition;
     onClick?: () => void;
     style?: React.CSSProperties;
+    styleHover?: React.CSSProperties;
+    iconStyle?: React.CSSProperties;
+    iconStyleHover?: React.CSSProperties;
 }
 
 function GlowingButton(props: IMainProps) {
@@ -31,15 +34,16 @@ function GlowingButton(props: IMainProps) {
                 cursor: 'pointer',
                 webkitTapHighlightColor: 'transparent',
                 userSelect: 'none'
-            }, ...props.style }}
+            }, ...props.style, ... props.styleHover ? props.styleHover : {} }}
         >
             <div style={{ margin: "auto" }}>
                 <FontAwesomeIcon
                     icon={ props.icon ? props.icon : faBan }
-                    style={{
+                    style={{ ...{
                         color: !hover ? "#222" : "#FFF",
-                        margin: "auto"
-                    }}
+                        margin: "auto",
+                        transition: "all 0.5s ease-out"
+                    }, ...props.iconStyle, ... hover && props.iconStyleHover ? props.iconStyleHover : {} }}
                 />
             </div>
         </div>

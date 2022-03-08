@@ -3,9 +3,10 @@ import React from 'react';
 import GlowingCheckBox from '../components/GlowingCheckBox';
 import NumberInput from '../components/NumberInput';
 import GlowingInputText from '../components/GlowingInputText';
+import GlowingButton from '../components/GlowingButton';
 import GlowingTextButton from '../components/GlowingTextButton';
 
-import { faSortNumericDown, faSubscript, faFont, faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faClipboardList, faClipboardCheck, faClipboard, faSortNumericDown, faSubscript, faFont, faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 interface IMainProps {}
 
@@ -72,10 +73,27 @@ class Main extends React.Component<IMainProps, IMainState> {
         this.setState({ password: password });
     }
 
+    copyPassword = (): void => {
+        navigator.clipboard.writeText(this.state.password).then(function() {
+            /* clipboard successfully set */
+          }, function() {
+            /* clipboard write failed */
+          });
+    }
+
     render() {
         return (
             <div>
-                <GlowingInputText value={ this.state.password } style={{ width: 400, fontSize: 16 }} />
+                <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
+                    <GlowingInputText value={ this.state.password } style={{ width: 400, fontSize: 16, borderRadius: 15 }} />
+                    <GlowingButton
+                        icon={ faClipboardList }
+                        onClick={ this.copyPassword }
+                        style={{ height: 45, width: 45 }}
+                        iconStyle={{ color: "#FFF" }}
+                        iconStyleHover={{ color: "#d7d7d7" }}
+                    />
+                </div>
 
                 <GlowingTextButton
                     text="Generate password"
