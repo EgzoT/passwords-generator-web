@@ -42,7 +42,9 @@ function GlowingButton(props: IMainProps) {
                     style={{ ...{
                         color: !hover ? "#222" : "#FFF",
                         margin: "auto",
-                        transition: "all 0.5s ease-out"
+                        fontSize: 27,
+                        transition: "all 0.5s ease-out",
+                        filter: hover ? "drop-shadow(0px 0px 3px rgba(33,156,243,1)) drop-shadow(0px 0px 3px rgba(33,156,243,1))" : undefined
                     }, ...props.iconStyle, ... hover && props.iconStyleHover ? props.iconStyleHover : {} }}
                 />
             </div>

@@ -109,7 +109,7 @@ class Main extends React.Component<IMainProps, IMainState> {
                 </div>
 
                 <div style={{ width: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ width: 'fit-content', padding: 10, height: 'auto', backgroundColor: "#00000070", marginTop: 10, display: 'flex', gap: 10, alignItems: 'auto', justifyContent: 'auto', borderRadius: 15 }}>
+                    <div style={{ width: 'fit-content', padding: 10, height: 'auto', backgroundColor: "#00000070", marginTop: 10, display: 'flex', gap: 15, alignItems: 'auto', justifyContent: 'auto', borderRadius: 15 }}>
                         <GlowingCheckBox icon={ faSortNumericDown } checked={ true } onClick={ (state: boolean) => { this.setState({ digits: state }) }} />
                         <GlowingCheckBox icon={ faSubscript } checked={ true } onClick={ (state: boolean) => { this.setState({ lowercase: state }) }} />
                         <GlowingCheckBox icon={ faFont } checked={ true } onClick={ (state: boolean) => { this.setState({ uppercase: state }) }} />

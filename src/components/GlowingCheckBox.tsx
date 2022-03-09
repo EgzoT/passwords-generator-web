@@ -16,22 +16,28 @@ interface IMainProps {
 
 function GlowingCheckBox(props: IMainProps) {
     const [checked, setChecked] = useState(props.checked);
+    const [hover, setHover] = useState(false);
 
     return (
         <div
             onClick={() => { setChecked(!checked); if (props.onClick) { props.onClick(!checked) } }}
+            onMouseEnter={ () => setHover(true) }
+            onMouseLeave={ () => setHover(false) }
             style={{ ...{
                 width: 60,
                 height: 60,
-                backgroundColor: "#101010",
+                backgroundColor: !hover ? "#101010" : "#141414",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                border: "3px solid #000",
+                borderWidth: 3,
+                borderStyle: "solid",
+                borderColor: "#000",
                 borderRadius: 15,
                 cursor: 'pointer',
                 webkitTapHighlightColor: 'transparent',
-                userSelect: 'none'
+                userSelect: 'none',
+                transition: "all 0.5s ease-out"
             }, ...props.style }}
         >
             <div style={{ margin: "auto" }}>
@@ -40,7 +46,9 @@ function GlowingCheckBox(props: IMainProps) {
                     style={{
                         color: !checked ? "#222" : "#FFF",
                         margin: "auto",
-                        transition: "all 0.5s ease-out"
+                        fontSize: 27,
+                        transition: "all 0.5s ease-out",
+                        filter: checked ? "drop-shadow(0px 0px 3px rgba(33,156,243,1)) drop-shadow(0px 0px 3px rgba(33,156,243,1))" : undefined
                     }}
                 />
             </div>

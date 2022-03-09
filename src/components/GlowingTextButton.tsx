@@ -20,7 +20,7 @@ function GlowingButton(props: IMainProps) {
                 height: 45,
                 fontSize: 16,
                 backgroundColor: "#101010",
-                color: !hover ? "#FFF" : "#818181",
+                color: "#FFF",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -32,7 +32,11 @@ function GlowingButton(props: IMainProps) {
                 transition: "all 0.5s ease-out"
             }, ...props.style, ... hover && props.styleHover ? props.styleHover : {} }}
         >
-            <div style={{ margin: "auto" }}>
+            <div style={{
+                margin: "auto",
+                transition: "all 0.5s ease-out",
+                filter: hover ? "drop-shadow(0px 0px 3px rgba(33,156,243,1)) drop-shadow(0px 0px 3px rgba(33,156,243,1))" : undefined
+            }}>
                 { props.text }
             </div>
         </div>

@@ -13,6 +13,7 @@ function GlowingInputText(props: IMainProps) {
     return (
         <input
                 type="text"
+                disabled={ true }
                 style={{ ...{
                     width: 100,
                     fontSize: 30,
