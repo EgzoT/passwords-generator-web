@@ -18,6 +18,8 @@ interface IMainState {
     lowercase: boolean;
     uppercase: boolean;
     specialCharacters: boolean;
+
+    copySuccess: boolean;
 }
 
 const digits: string = '0123456789';
@@ -36,9 +38,14 @@ class Main extends React.Component<IMainProps, IMainState> {
             digits: true,
             lowercase: true,
             uppercase: true,
-            specialCharacters: true
+            specialCharacters: true,
+
+            copySuccess: false
         };
     }
+
+    copyTimeout: number = 0;
+
 
     getCharacters = (): string => {
         let letters: string = "";
@@ -74,10 +81,20 @@ class Main extends React.Component<IMainProps, IMainState> {
     }
 
     copyPassword = (): void => {
+        let that = this;
+
         navigator.clipboard.writeText(this.state.password).then(function() {
-            /* clipboard successfully set */
+            // clipboard successfully set
+            that.setState({ copySuccess: true });
+
+            window.clearTimeout(that.copyTimeout);
+            that.copyTimeout = 0;
+
+            that.copyTimeout = window.setTimeout(function() {
+                that.setState({ copySuccess: false });
+            }, 5000);
           }, function() {
-            /* clipboard write failed */
+            /* clipboard write failed rgba(201,44,1,1) */
           });
     }
 
@@ -87,11 +104,11 @@ class Main extends React.Component<IMainProps, IMainState> {
                 <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
                     <GlowingInputText value={ this.state.password } style={{ width: 400, fontSize: 16, borderRadius: 15 }} />
                     <GlowingButton
-                        icon={ faClipboardList }
+                        icon={ !this.state.copySuccess ? faClipboardList : faClipboardCheck }
                         onClick={ this.copyPassword }
                         style={{ height: 45, width: 45 }}
-                        iconStyle={{ color: "#FFF" }}
-                        iconStyleHover={{ color: "#d7d7d7" }}
+                        iconStyle={ !this.state.copySuccess ? { color: "#FFF" } : { color: "#1db51c" } }
+                        iconStyleHover={ !this.state.copySuccess ? { color: "#d7d7d7" } : { color: "#d7d7d7", filter: "drop-shadow(0px 0px 3px rgba(2,211,0,1)) drop-shadow(0px 0px 3px rgba(2,211,0,1))" } }
                     />
                 </div>
 
