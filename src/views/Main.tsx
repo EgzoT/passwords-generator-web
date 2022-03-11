@@ -6,7 +6,7 @@ import GlowingInputText from '../components/GlowingInputText';
 import GlowingButton from '../components/GlowingButton';
 import GlowingTextButton from '../components/GlowingTextButton';
 
-import { faClipboardList, faClipboardCheck, faClipboard, faSortNumericDown, faSubscript, faFont, faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition, faClipboardList, faClipboardCheck, faClipboard, faSortNumericDown, faSubscript, faFont, faHashtag, faBan } from "@fortawesome/free-solid-svg-icons";
 
 interface IMainProps {}
 
@@ -19,7 +19,13 @@ interface IMainState {
     uppercase: boolean;
     specialCharacters: boolean;
 
-    copySuccess: boolean;
+    copyStyle: CopyButton;
+}
+
+enum CopyButton {
+    None = 0,
+    Success = 1,
+    Error = 2
 }
 
 const digits: string = '0123456789';
@@ -40,7 +46,7 @@ class Main extends React.Component<IMainProps, IMainState> {
             uppercase: true,
             specialCharacters: true,
 
-            copySuccess: false
+            copyStyle: CopyButton.None
         };
     }
 
@@ -85,17 +91,61 @@ class Main extends React.Component<IMainProps, IMainState> {
 
         navigator.clipboard.writeText(this.state.password).then(function() {
             // clipboard successfully set
-            that.setState({ copySuccess: true });
+            that.setState({ copyStyle: CopyButton.Success });
 
             window.clearTimeout(that.copyTimeout);
             that.copyTimeout = 0;
 
             that.copyTimeout = window.setTimeout(function() {
-                that.setState({ copySuccess: false });
+                that.setState({ copyStyle: CopyButton.None });
             }, 5000);
           }, function() {
-            /* clipboard write failed rgba(201,44,1,1) */
+            // clipboard write failed
+            that.setState({ copyStyle: CopyButton.Error });
+
+            window.clearTimeout(that.copyTimeout);
+            that.copyTimeout = 0;
+
+            that.copyTimeout = window.setTimeout(function() {
+                that.setState({ copyStyle: CopyButton.None });
+            }, 5000);
           });
+    }
+
+    getCopyIcon = (): IconDefinition => {
+        if (this.state.copyStyle === CopyButton.None) {
+            return faClipboardList;
+        } else if (this.state.copyStyle === CopyButton.Success) {
+            return faClipboardCheck;
+        } else if (this.state.copyStyle === CopyButton.Error) {
+            return faClipboard;
+        } else {
+            return faBan;
+        }
+    }
+
+    getCopyIconStyle = (): React.CSSProperties => {
+        if (this.state.copyStyle === CopyButton.None) {
+            return { color: "#FFF" };
+        } else if (this.state.copyStyle === CopyButton.Success) {
+            return { color: "#1db51c" };
+        } else if (this.state.copyStyle === CopyButton.Error) {
+            return {};
+        } else {
+            return {};
+        }
+    }
+
+    getCopyIconStyleHover = (): React.CSSProperties => {
+        if (this.state.copyStyle === CopyButton.None) {
+            return { color: "#d7d7d7" };
+        } else if (this.state.copyStyle === CopyButton.Success) {
+            return { color: "#d7d7d7", filter: "drop-shadow(0px 0px 3px rgba(2,211,0,1)) drop-shadow(0px 0px 3px rgba(2,211,0,1))" };
+        } else if (this.state.copyStyle === CopyButton.Error) {
+            return { color: "#d7d7d7", filter: "drop-shadow(0px 0px 3px rgba(201,44,1,1)) drop-shadow(0px 0px 3px rgba(201,44,1,1))" };
+        } else {
+            return {};
+        }
     }
 
     render() {
@@ -104,11 +154,11 @@ class Main extends React.Component<IMainProps, IMainState> {
                 <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
                     <GlowingInputText value={ this.state.password } style={{ width: 400, fontSize: 16, borderRadius: 15 }} />
                     <GlowingButton
-                        icon={ !this.state.copySuccess ? faClipboardList : faClipboardCheck }
+                        icon={ this.getCopyIcon() }
                         onClick={ this.copyPassword }
                         style={{ height: 45, width: 45 }}
-                        iconStyle={ !this.state.copySuccess ? { color: "#FFF" } : { color: "#1db51c" } }
-                        iconStyleHover={ !this.state.copySuccess ? { color: "#d7d7d7" } : { color: "#d7d7d7", filter: "drop-shadow(0px 0px 3px rgba(2,211,0,1)) drop-shadow(0px 0px 3px rgba(2,211,0,1))" } }
+                        iconStyle={ this.getCopyIconStyle() }
+                        iconStyleHover={ this.getCopyIconStyleHover() }
                     />
                 </div>
 
