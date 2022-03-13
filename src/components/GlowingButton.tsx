@@ -32,11 +32,11 @@ function GlowingButton(props: IMainProps) {
                 border: "3px solid #000",
                 borderRadius: 15,
                 cursor: 'pointer',
-                webkitTapHighlightColor: 'transparent',
+                WebkitTapHighlightColor: 'transparent',
                 userSelect: 'none'
             }, ...props.style, ... props.styleHover ? props.styleHover : {} }}
         >
-            <div style={{ margin: "auto" }}>
+            <div style={{ display: "flex" }}>
                 <FontAwesomeIcon
                     icon={ props.icon ? props.icon : faBan }
                     style={{ ...{

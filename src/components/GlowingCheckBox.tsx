@@ -35,7 +35,7 @@ function GlowingCheckBox(props: IMainProps) {
                 borderColor: "#000",
                 borderRadius: 15,
                 cursor: 'pointer',
-                webkitTapHighlightColor: 'transparent',
+                WebkitTapHighlightColor: 'transparent',
                 userSelect: 'none',
                 transition: "all 0.5s ease-out"
             }, ...props.style }}
