@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 interface IMainProps {
     value?: string;
+    hideText?: boolean;
     onClick?: () => void;
     onChange?: (value: string) => void;
     style?: React.CSSProperties;
@@ -13,7 +14,7 @@ function GlowingInputText(props: IMainProps) {
 
     return (
         <input
-            type="text"
+            type={ props.hideText ? "password" : "text" }
             disabled={ true }
             style={{ ...{
                 width: 100,

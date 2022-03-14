@@ -6,13 +6,14 @@ import GlowingInputText from '../components/GlowingInputText';
 import GlowingButton from '../components/GlowingButton';
 import GlowingTextButton from '../components/GlowingTextButton';
 
-import { IconDefinition, faClipboardList, faClipboardCheck, faClipboard, faSortNumericDown, faSubscript, faFont, faHashtag, faBan } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition, faClipboardList, faClipboardCheck, faClipboard, faSortNumericDown, faSubscript, faFont, faHashtag, faBan, faEye } from "@fortawesome/free-solid-svg-icons";
 
 interface IMainProps {}
 
 interface IMainState {
     password: string;
     length: number;
+    showPassword: boolean;
 
     digits: boolean;
     lowercase: boolean;
@@ -40,6 +41,7 @@ class Main extends React.Component<IMainProps, IMainState> {
         this.state = {
             password: "",
             length: 20,
+            showPassword: true,
 
             digits: true,
             lowercase: true,
@@ -152,7 +154,17 @@ class Main extends React.Component<IMainProps, IMainState> {
         return (
             <div>
                 <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
-                    <GlowingInputText value={ this.state.password } style={{ width: 400, fontSize: 16, borderRadius: 15 }} />
+                    <GlowingCheckBox
+                        icon={ faEye }
+                        checked={ this.state.showPassword }
+                        onClick={ (state: boolean) => { this.setState({ showPassword: state }) }}
+                        style={{ height: 45, width: 45 }}
+                    />
+                    <GlowingInputText
+                        value={ this.state.password }
+                        hideText={ !this.state.showPassword }
+                        style={{ width: 400, fontSize: 16, borderRadius: 15 }}
+                    />
                     <GlowingButton
                         icon={ this.getCopyIcon() }
                         onClick={ this.copyPassword }
