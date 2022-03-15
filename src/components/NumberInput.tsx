@@ -18,18 +18,21 @@ function NumberInput(props: IMainProps) {
     return (
         <div style={{
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
+            flexWrap: "wrap"
         }}>
-            <GlowingButton
-                onClick={ () => { setValue(value - 5); if (props.onChange) { props.onChange(value - 5) } } }
-                icon={ faAngleDoubleLeft }
-                style={{ width: 45, height: 45, borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
-            />
-            <GlowingButton
-                onClick={ () => { setValue(value - 1); if (props.onChange) { props.onChange(value - 1) } } }
-                icon={ faAngleLeft }
-                style={{ width: 45, height: 45, borderRadius: 0, borderLeft: "0px solid #000" }}
-            />
+            <div style={{ display: "flex" }}>
+                <GlowingButton
+                    onClick={ () => { setValue(value - 5); if (props.onChange) { props.onChange(value - 5) } } }
+                    icon={ faAngleDoubleLeft }
+                    style={{ width: 45, height: 45, borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
+                />
+                <GlowingButton
+                    onClick={ () => { setValue(value - 1); if (props.onChange) { props.onChange(value - 1) } } }
+                    icon={ faAngleLeft }
+                    style={{ width: 45, height: 45, borderRadius: 0, borderLeft: "0px solid #000" }}
+                />
+            </div>
             <input
                 type="text"
                 style={{ ...{
@@ -55,16 +58,18 @@ function NumberInput(props: IMainProps) {
                 onBlur={ () => { setFocus(false) } }
                 onFocus={ () => { setFocus(true) } }
             />
-            <GlowingButton
-                onClick={ () => { setValue(value + 1); if (props.onChange) { props.onChange(value + 1) } } }
-                icon={ faAngleRight }
-                style={{ width: 45, height: 45, borderRadius: 0, borderRight: "0px solid #000" }}
-            />
-            <GlowingButton
-                onClick={ () => { setValue(value + 5); if (props.onChange) { props.onChange(value + 5) } } }
-                icon={ faAngleDoubleRight }
-                style={{ width: 45, height: 45, borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
-            />
+            <div style={{ display: "flex" }}>
+                <GlowingButton
+                    onClick={ () => { setValue(value + 1); if (props.onChange) { props.onChange(value + 1) } } }
+                    icon={ faAngleRight }
+                    style={{ width: 45, height: 45, borderRadius: 0, borderRight: "0px solid #000" }}
+                />
+                <GlowingButton
+                    onClick={ () => { setValue(value + 5); if (props.onChange) { props.onChange(value + 5) } } }
+                    icon={ faAngleDoubleRight }
+                    style={{ width: 45, height: 45, borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+                />
+            </div>
         </div>
     );
 }

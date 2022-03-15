@@ -130,9 +130,9 @@ class Main extends React.Component<IMainProps, IMainState> {
         if (this.state.copyStyle === CopyButton.None) {
             return { color: "#FFF" };
         } else if (this.state.copyStyle === CopyButton.Success) {
-            return { color: "#1db51c" };
+            return { color: "#FFF" };
         } else if (this.state.copyStyle === CopyButton.Error) {
-            return {};
+            return { color: "#FFF" };
         } else {
             return {};
         }
@@ -153,7 +153,7 @@ class Main extends React.Component<IMainProps, IMainState> {
     render() {
         return (
             <div>
-                <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
+                <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap",  gap: 10 }}>
                     <GlowingCheckBox
                         icon={ faEye }
                         checked={ this.state.showPassword }
@@ -163,7 +163,7 @@ class Main extends React.Component<IMainProps, IMainState> {
                     <GlowingInputText
                         value={ this.state.password }
                         hideText={ !this.state.showPassword }
-                        style={{ width: 400, fontSize: 16, borderRadius: 15 }}
+                        style={{ width: 400, maxWidth: "calc(100vw - 10px)", fontSize: 16, borderRadius: 15, height: 45 }}
                     />
                     <GlowingButton
                         icon={ this.getCopyIcon() }
@@ -177,7 +177,15 @@ class Main extends React.Component<IMainProps, IMainState> {
                 <GlowingTextButton
                     text="Generate password"
                     onClick={ this.generatePassword }
-                    style={{ width: 160, marginLeft: "auto", marginRight: "auto", marginTop: 10, marginBottom: 10 }}
+                    style={{
+                        width: "fit-content",
+                        padding: "0px 10px",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 10,
+                        marginBottom: 10
+                    }}
+                    styleText={{ overflowWrap: "break-word" }}
                 />
 
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 10, marginBottom: 5 }}>
@@ -187,8 +195,26 @@ class Main extends React.Component<IMainProps, IMainState> {
                     />
                 </div>
 
-                <div style={{ width: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ width: 'fit-content', padding: 10, height: 'auto', backgroundColor: "#00000070", marginTop: 10, display: 'flex', gap: 15, alignItems: 'auto', justifyContent: 'auto', borderRadius: 15 }}>
+                <div style={{
+                    width: 'auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <div style={{
+                        width: 'fit-content',
+                        maxWidth: 'calc(100vw - 20px)',
+                        padding: 10,
+                        height: 'auto',
+                        backgroundColor: "#00000070",
+                        marginTop: 10,
+                        display: 'flex',
+                        flexWrap: "wrap",
+                        gap: 15,
+                        alignItems: 'auto',
+                        justifyContent: 'center',
+                        borderRadius: 15
+                    }}>
                         <GlowingCheckBox icon={ faSortNumericDown } checked={ true } onClick={ (state: boolean) => { this.setState({ digits: state }) }} />
                         <GlowingCheckBox icon={ faSubscript } checked={ true } onClick={ (state: boolean) => { this.setState({ lowercase: state }) }} />
                         <GlowingCheckBox icon={ faFont } checked={ true } onClick={ (state: boolean) => { this.setState({ uppercase: state }) }} />
