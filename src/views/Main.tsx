@@ -29,6 +29,15 @@ enum CopyButton {
     Error = 2
 }
 
+enum LocalStorageKeys {
+    Length = "length",
+    ShowPassword = "showPassword",
+    Digits = "digits",
+    Lowercase = "lowercase",
+    Uppercase = "uppercase",
+    SpecialCharacters = "specialCharacters"
+}
+
 const digits: string = '0123456789';
 const lowercase: string = 'abcdefghijklmnopqrstuvwxyz';
 const uppercase: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -53,6 +62,10 @@ class Main extends React.Component<IMainProps, IMainState> {
     }
 
     copyTimeout: number = 0;
+
+    componentDidMount(): void {
+        this.loadDataFromLocalStorage();
+    }
 
 
     getCharacters = (): string => {
@@ -150,6 +163,110 @@ class Main extends React.Component<IMainProps, IMainState> {
         }
     }
 
+    // Local storage
+
+    setValueToLocalStorage = (key: string, value: string): void => {
+        localStorage.setItem(key, value);
+    }
+
+    isValueInLocalStorage = (key: string): boolean => {
+        if (localStorage.getItem(key) === null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    getTextValueFromLocalStorage = (key: string): string|null => {
+        let value: string|null = localStorage.getItem(key);
+        if (value === null) {
+            return "";
+        } else {
+            return value;
+        }
+    }
+
+    getNumberValueFromLocalStorage = (key: string): number => {
+        let value: string|null = localStorage.getItem(key);
+        if (value === null) {
+            return 0;
+        } else {
+            return Number(value);
+        }
+    }
+
+    getBooleanValueFromLocalStorage = (key: string): boolean => {
+        let value: string|null = localStorage.getItem(key);
+        if (value === null) {
+            return false;
+        } else {
+            if (value === "true") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    loadDataFromLocalStorage = (): void => {
+        if (this.isValueInLocalStorage(LocalStorageKeys.Length)) {
+            this.setState({ length: this.getNumberValueFromLocalStorage(LocalStorageKeys.Length) });
+        }
+
+        if (this.isValueInLocalStorage(LocalStorageKeys.ShowPassword)) {
+            console.log(this.getBooleanValueFromLocalStorage(LocalStorageKeys.ShowPassword)); //TEST
+            this.setState({ showPassword: this.getBooleanValueFromLocalStorage(LocalStorageKeys.ShowPassword) });
+        }
+
+        if (this.isValueInLocalStorage(LocalStorageKeys.Digits)) {
+            this.setState({ digits: this.getBooleanValueFromLocalStorage(LocalStorageKeys.Digits) });
+        }
+
+        if (this.isValueInLocalStorage(LocalStorageKeys.Lowercase)) {
+            this.setState({ lowercase: this.getBooleanValueFromLocalStorage(LocalStorageKeys.Lowercase) });
+        }
+
+        if (this.isValueInLocalStorage(LocalStorageKeys.Uppercase)) {
+            this.setState({ uppercase: this.getBooleanValueFromLocalStorage(LocalStorageKeys.Uppercase) });
+        }
+
+        if (this.isValueInLocalStorage(LocalStorageKeys.SpecialCharacters)) {
+            this.setState({ specialCharacters: this.getBooleanValueFromLocalStorage(LocalStorageKeys.SpecialCharacters) });
+        }
+    }
+
+    // onChange
+
+    onChangeLength = (v: number): void => {
+        this.setValueToLocalStorage(LocalStorageKeys.Length, v.toString());
+        this.setState({ length: v });
+    }
+
+    onChangeShowPassword = (v: boolean): void => {
+        this.setValueToLocalStorage(LocalStorageKeys.ShowPassword, v.toString());
+        this.setState({ showPassword: v });
+    }
+
+    onChangeDigits = (v: boolean): void => {
+        this.setValueToLocalStorage(LocalStorageKeys.Digits, v.toString());
+        this.setState({ digits: v });
+    }
+
+    onChangeLowercase = (v: boolean): void => {
+        this.setValueToLocalStorage(LocalStorageKeys.Lowercase, v.toString());
+        this.setState({ lowercase: v });
+    }
+
+    onChangeUppercase = (v: boolean): void => {
+        this.setValueToLocalStorage(LocalStorageKeys.Uppercase, v.toString());
+        this.setState({ uppercase: v });
+    }
+
+    onChangeSpecialCharacters = (v: boolean): void => {
+        this.setValueToLocalStorage(LocalStorageKeys.SpecialCharacters, v.toString());
+        this.setState({ specialCharacters: v });
+    }
+
     render() {
         return (
             <div>
@@ -157,7 +274,7 @@ class Main extends React.Component<IMainProps, IMainState> {
                     <GlowingCheckBox
                         icon={ faEye }
                         checked={ this.state.showPassword }
-                        onClick={ (state: boolean) => { this.setState({ showPassword: state }) }}
+                        onClick={ this.onChangeShowPassword }
                         style={{ height: 45, width: 45 }}
                     />
                     <GlowingInputText
@@ -191,7 +308,7 @@ class Main extends React.Component<IMainProps, IMainState> {
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 10, marginBottom: 5 }}>
                     <NumberInput
                         value={ this.state.length }
-                        onChange={ (v) => { this.setState({ length: v }) } }
+                        onChange={ this.onChangeLength }
                     />
                 </div>
 
@@ -215,10 +332,26 @@ class Main extends React.Component<IMainProps, IMainState> {
                         justifyContent: 'center',
                         borderRadius: 15
                     }}>
-                        <GlowingCheckBox icon={ faSortNumericDown } checked={ true } onClick={ (state: boolean) => { this.setState({ digits: state }) }} />
-                        <GlowingCheckBox icon={ faSubscript } checked={ true } onClick={ (state: boolean) => { this.setState({ lowercase: state }) }} />
-                        <GlowingCheckBox icon={ faFont } checked={ true } onClick={ (state: boolean) => { this.setState({ uppercase: state }) }} />
-                        <GlowingCheckBox icon={ faHashtag } checked={ true } onClick={ (state: boolean) => { this.setState({ specialCharacters: state }) }} />
+                        <GlowingCheckBox
+                            icon={ faSortNumericDown }
+                            checked={ this.state.digits }
+                            onClick={ this.onChangeDigits }
+                        />
+                        <GlowingCheckBox
+                            icon={ faSubscript }
+                            checked={ this.state.lowercase }
+                            onClick={ this.onChangeLowercase }
+                        />
+                        <GlowingCheckBox
+                            icon={ faFont }
+                            checked={ this.state.uppercase }
+                            onClick={ this.onChangeUppercase }
+                        />
+                        <GlowingCheckBox
+                            icon={ faHashtag }
+                            checked={ this.state.specialCharacters }
+                            onClick={ this.onChangeSpecialCharacters }
+                        />
                     </div>
                 </div>
             </div>

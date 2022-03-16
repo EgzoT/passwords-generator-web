@@ -9,18 +9,17 @@ import { faBan } from "@fortawesome/free-solid-svg-icons";
 
 interface IMainProps {
     icon?: IconDefinition;
-    checked?: boolean;
+    checked: boolean;
     onClick?: (value: boolean) => void;
     style?: React.CSSProperties;
 }
 
 function GlowingCheckBox(props: IMainProps) {
-    const [checked, setChecked] = useState(props.checked);
     const [hover, setHover] = useState(false);
 
     return (
         <div
-            onClick={() => { setChecked(!checked); if (props.onClick) { props.onClick(!checked) } }}
+            onClick={() => { if (props.onClick) { props.onClick(!props.checked) } }}
             onMouseEnter={ () => setHover(true) }
             onMouseLeave={ () => setHover(false) }
             style={{ ...{
@@ -44,11 +43,11 @@ function GlowingCheckBox(props: IMainProps) {
                 <FontAwesomeIcon
                     icon={ props.icon ? props.icon : faBan }
                     style={{
-                        color: !checked ? "#222" : "#FFF",
+                        color: !props.checked ? "#222" : "#FFF",
                         margin: "auto",
                         fontSize: 27,
                         transition: "all 0.5s ease-out",
-                        filter: checked ? "drop-shadow(0px 0px 3px rgba(33,156,243,1)) drop-shadow(0px 0px 3px rgba(33,156,243,1))" : undefined
+                        filter: props.checked ? "drop-shadow(0px 0px 3px rgba(33,156,243,1)) drop-shadow(0px 0px 3px rgba(33,156,243,1))" : undefined
                     }}
                 />
             </div>
