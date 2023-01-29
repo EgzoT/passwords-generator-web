@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 
 // https://www.youtube.com/watch?v=zcELGwSZwx4
 
 interface IMainProps {
-    icon?: IconDefinition;
+    icon?: IconProp;
     checked: boolean;
     onClick?: (value: boolean) => void;
     style?: React.CSSProperties;

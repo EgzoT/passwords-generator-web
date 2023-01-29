@@ -6,7 +6,18 @@ import GlowingInputText from '../components/GlowingInputText';
 import GlowingButton from '../components/GlowingButton';
 import GlowingTextButton from '../components/GlowingTextButton';
 
-import { IconDefinition, faClipboardList, faClipboardCheck, faClipboard, faSortNumericDown, faSubscript, faFont, faHashtag, faBan, faEye } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import {
+    faClipboardList,
+    faClipboardCheck,
+    faClipboard,
+    faSortNumericDown,
+    faSubscript,
+    faFont,
+    faHashtag,
+    faBan,
+    faEye
+} from "@fortawesome/free-solid-svg-icons";
 
 interface IMainProps {}
 
@@ -127,7 +138,7 @@ class Main extends React.Component<IMainProps, IMainState> {
           });
     }
 
-    getCopyIcon = (): IconDefinition => {
+    getCopyIcon = (): IconProp => {
         if (this.state.copyStyle === CopyButton.None) {
             return faClipboardList;
         } else if (this.state.copyStyle === CopyButton.Success) {

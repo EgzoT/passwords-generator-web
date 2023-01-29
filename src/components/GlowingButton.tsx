@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 
 interface IMainProps {
-    icon?: IconDefinition;
+    icon?: IconProp;
     onClick?: () => void;
     style?: React.CSSProperties;
     styleHover?: React.CSSProperties;
