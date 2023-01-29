@@ -39,7 +39,7 @@ function GlowingCheckBox(props: IMainProps) {
                 transition: "all 0.5s ease-out"
             }, ...props.style }}
         >
-            <div style={{ margin: "auto" }}>
+            <div style={{ display: "flex" }}>
                 <FontAwesomeIcon
                     icon={ props.icon ? props.icon : faBan }
                     style={{

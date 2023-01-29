@@ -41,3 +41,25 @@ npm uninstall <package_name>
 ```sh
 sudo docker compose restart
 ```
+
+# Deploy gh-page
+
+## Clone gh-pages to new folder
+
+```sh
+git clone --single-branch --branch gh-pages https://github.com/EgzoT/passwords-generator-web.git
+```
+
+## Build main branch repo and copy files to gh-pages branch
+
+```sh
+npm run build
+```
+
+## Push changes
+
+```sh
+git add .
+git commit -m "Updates"
+git push
+```
