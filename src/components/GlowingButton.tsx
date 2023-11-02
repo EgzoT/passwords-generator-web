@@ -34,7 +34,7 @@ function GlowingButton(props: IMainProps) {
                 cursor: 'pointer',
                 WebkitTapHighlightColor: 'transparent',
                 userSelect: 'none'
-            }, ...props.style, ... props.styleHover ? props.styleHover : {} }}
+            }, ...props.style, ...props.styleHover ? props.styleHover : {} }}
         >
             <div style={{ display: "flex" }}>
                 <FontAwesomeIcon
@@ -45,7 +45,7 @@ function GlowingButton(props: IMainProps) {
                         fontSize: 27,
                         transition: "all 0.5s ease-out",
                         filter: hover ? "drop-shadow(0px 0px 3px rgba(33,156,243,1)) drop-shadow(0px 0px 3px rgba(33,156,243,1))" : undefined
-                    }, ...props.iconStyle, ... hover && props.iconStyleHover ? props.iconStyleHover : {} }}
+                    }, ...props.iconStyle, ...hover && props.iconStyleHover ? props.iconStyleHover : {} }}
                 />
             </div>
         </div>

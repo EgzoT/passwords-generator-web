@@ -9,8 +9,19 @@ interface IMainProps {
 }
 
 function GlowingInputText(props: IMainProps) {
-    const [value, setValue] = useState(props.value ? props.value : "");
     const [focus, setFocus] = useState(false);
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (props.onChange) {
+            props.onChange(e.target.value)
+        }
+    }
+
+    const onClick = () => {
+        if (props.onClick) {
+            props.onClick()
+        }
+    }
 
     return (
         <input
@@ -30,10 +41,10 @@ function GlowingInputText(props: IMainProps) {
                 transition: "all 0.5s ease-out"
             }, ...props.style }}
             value={ props.value ? props.value : "" }
-            onClick={() => { if (props.onClick) { props.onClick() } }}
-            onChange={ (e) => { setValue(e.target.value); if (props.onChange) { props.onChange(e.target.value) } } }
+            onClick={ onClick }
+            onChange={ onChange }
             onBlur={ () => { setFocus(false) } }
-            onFocus={ (e) => { setFocus(true) } }
+            onFocus={ () => { setFocus(true) } }
         />
     );
 }

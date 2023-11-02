@@ -32,13 +32,13 @@ function GlowingButton(props: IMainProps) {
                 WebkitTapHighlightColor: 'transparent',
                 userSelect: 'none',
                 transition: "all 0.5s ease-out"
-            }, ...props.style, ... hover && props.styleHover ? props.styleHover : {} }}
+            }, ...props.style, ...hover && props.styleHover ? props.styleHover : {} }}
         >
             <div style={{ ...{
                 margin: "auto",
                 transition: "all 0.5s ease-out",
                 filter: hover ? "drop-shadow(0px 0px 3px rgba(33,156,243,1)) drop-shadow(0px 0px 3px rgba(33,156,243,1))" : undefined
-            }, ...props.styleText, ... hover && props.styleTextHover ? props.styleTextHover : {} }}>
+            }, ...props.styleText, ...hover && props.styleTextHover ? props.styleTextHover : {} }}>
                 { props.text }
             </div>
         </div>
