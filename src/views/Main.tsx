@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import GlowingCheckBox from '../components/GlowingCheckBox';
 import NumberInput from '../components/NumberInput';
@@ -54,7 +54,7 @@ const lowercase: string = 'abcdefghijklmnopqrstuvwxyz';
 const uppercase: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const specialCharacters: string = '~!@-#$';
 
-class Main extends React.Component<IMainProps, IMainState> {
+class Main extends Component<IMainProps, IMainState> {
     constructor(props: IMainProps) {
         super(props);
 
