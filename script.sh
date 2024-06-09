@@ -2,4 +2,4 @@
 
 cd passwords-generator-web
 npm install
-npm start
+npm run dev

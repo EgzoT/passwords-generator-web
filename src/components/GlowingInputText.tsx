@@ -30,6 +30,7 @@ function GlowingInputText(props: IMainProps) {
             style={{ ...{
                 width: 100,
                 fontSize: 30,
+                fontFamily: 'monospace, "Courier New", Monaco, "Lucida Console", "Nimbus Mono L"',
                 WebkitAppearance: "none",
                 MozAppearance: "textfield",
                 textAlign: "center",
